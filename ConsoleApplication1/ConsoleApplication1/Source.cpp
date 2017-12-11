@@ -1,10 +1,10 @@
 #include <iostream>
 #include <fstream>
 #include <string> 
+#include <cstdlib>
 using namespace std;
 
 int main() {
-	
 	system("pause");
 	return 0;
 }
@@ -74,14 +74,12 @@ public:
 	char search_(int key) 
 	{
 		POINT * secret;
-		char value;
 		do
 		{
 			*way = *secret;
 			if (way->left == nullptr && way->right == nullptr)
 			{
-				value = way->date[key];
-				return date[key];
+				return (*(way->date))[key];
 			}
 			else 
 			{
@@ -98,12 +96,43 @@ public:
 				if (way->left == nullptr)
 					secret->right;
 			}
-		} while (key == key);
+		} while (1 == 1);
+		delete secret;
+		secret = nullptr;
 	}
-	void min_(int key) {}
-	void max_(int key) {}
+
 	void print_() {}
-	~ROPE() {}
+	
+	~ROPE() 
+	{
+		POINT * secret;
+		while (head->left != nullptr && head->right != nullptr)
+		{
+			*way = *head;
+			*secret = *way;
+			while (way->left != nullptr && way->right != nullptr)
+			{
+				while (way->left != nullptr)
+				{
+					*secret = *way;
+					way->left;
+				}
+				if (way->left == nullptr)
+					*secret = *way;
+				way->right;
+			}
+			delete way->date, way->weight;
+			if (secret->left != nullptr)
+				delete secret->left;
+			else
+				delete secret->right;
+			delete &way->weight;
+		}
+		delete &weight, head, way, secret;
+		head = nullptr;
+		way = nullptr;
+		secret = nullptr;
+	}
 };
 
 struct POINT
@@ -112,5 +141,4 @@ struct POINT
 	POINT *left;
 	POINT *right;
 	string *date;
-
 };
