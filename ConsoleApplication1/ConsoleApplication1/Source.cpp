@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string> 
-#include <cstdlib>
+//#include <cstdlib>
 using namespace std;
 
 int main() {
@@ -69,11 +69,46 @@ public:
 		*way = *head;
 	}
 	
-	void delete_(int key) {}
+	void delete_(int key) 
+	{
+		POINT *secret;
+		*way = *head;
+		*secret = *way;
+		if (way->left == nullptr && way->right == nullptr)
+		{
+			;
+		}
+		do
+		{
+			if (way->left != nullptr && way->right != nullptr)
+			{
+				way->left;
+				if (key <= way->weight && (way->left != nullptr || way->right != nullptr))
+					secret->left;
+				if (key <= way->weight && (way->left == nullptr && way->right == nullptr))
+				{
+					delete way->date, way->weight, secret->left;
+					secret->left = nullptr;
+				}
+				if (key >= way->weight)
+				{
+					*way = *secret;
+					way->right;
+					if (way->left != nullptr || way->right != nullptr)
+						secret->right;
+					if (way->left == nullptr && way->right == nullptr)
+					{
+						delete way->date, way->weight, secret->right;
+						secret->right = nullptr;
+					}
+				}
+			}
+		} while (1 == 1);
+	}
 	
 	char search_(int key) 
 	{
-		POINT * secret;
+		POINT *secret;
 		do
 		{
 			*way = *secret;
@@ -86,7 +121,7 @@ public:
 				if (way->left != nullptr && way->right != nullptr)
 				{
 					way->left;
-					if (key >= way->weight)
+					if (key <= way->weight)
 						secret->left;
 					else
 						secret->right;
