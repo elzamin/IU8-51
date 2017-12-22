@@ -1,0 +1,50 @@
+<html>
+<head> 
+	<title>Усубалиев Эльзамин. ИУ8-51.</title> 
+</head>
+<body>
+<canvas id='pic' height='1000' width='1000' style='border:1px solid;'></canvas>
+<script>
+	var canvas = document.getElementById('pic');
+	var ctx = canvas.getContext('2d');
+	var bl=0;
+	var x0,y0,xp,yp,xn,yn;
+	canvas.onclick = function () {
+		if (bl==0) {
+			xp=event.offsetX;
+			yp=event.offsetY;
+			bl=1;
+		}
+		else {
+			xn=event.offsetX;
+			yn=event.offsetY;
+			var x = xp, y = yp;
+			var r = Math.sqrt((yp-yn)*(yp-yn)+(xp-xn)*(xp-xn));
+			var del=1-2*r;
+			var e = 0;
+			var t=0;
+			while (r>=0) {
+				ctx.fillRect(x + t, y + r, 1, 1);
+		        	ctx.fillRect(x + t, y - r, 1, 1);
+		        	ctx.fillRect(x - t, y + r, 1, 1);
+		        	ctx.fillRect(x - t, y - r, 1, 1);
+				e = 2 * (del + r) - 1;
+				if ((del < 0) && (e <= 0)) {
+		            		del += 2 * ++t + 1;
+		            		continue
+		        	}
+				e = 2*(del-t) - 1;
+				if ((del > 0) && (e > 0)) {
+		            		del += 1 - 2 * --r;
+		            		continue;
+		        	}
+				t++;
+		        	del += 2 * (t - r);
+		        	r--;
+			}
+			bl=0;
+		}
+	}	
+</script>
+</body>
+</html>
