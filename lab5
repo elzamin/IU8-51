@@ -1,0 +1,58 @@
+<html>
+<head> 
+	<title>Усубалиев Эльзамин. ИУ8-51.</title> 
+</head>
+<body>
+<canvas id='lab01' height='1000' width='1000' style='border:1px solid;'></canvas>
+<script>
+	var canvas = document.getElementById('lab01');
+	var ctx = canvas.getContext('2d');
+	var count=0;
+	var x0,y0,xp,yp,xn,yn;
+	canvas.onclick = function () {
+		if (count==0) {
+			x0=event.offsetX;
+			y0=event.offsetY;
+			yn=y0;
+			xn=x0;
+		}
+		else if (count<=5) {
+			yp=yn;
+			xp=xn;
+			xn=event.offsetX;
+			yn=event.offsetY;
+			if (count==5) {
+				yn=y0;
+				xn=x0;
+			}
+			var x1 = xp, x2 = xn, y1=yp, y2=yn;
+			var ch = Math.abs(y1-y2)>Math.abs(x1-x2);
+			if (ch) {
+				[y1, x1] = [x1, y1];
+		        	[y2, x2] = [x2, y2];
+		    	}
+			if (x1 > x2)
+		    	{
+		        	[x1, x2] = [x2, x1];
+		        	[y1, y2] = [y2, y1];
+		    	}
+			var dx = Math.abs(x2 - x1);
+		    	var dy = Math.abs(y2 - y1);
+			var y = y1;
+			var e=dx/2;
+			var st=(y1 > y2) ? -1 : 1;
+			for (var x = x1; x <= x2; x++) {
+		        	ctx.fillRect(ch ? y : x, ch ? x : y, 1, 1);
+		        	e -= dy;
+		        	if (e < 0)
+		        	{
+		           	 	y += st;
+		            		e += dx;
+		        	}
+		    	}
+		}
+		count+=1;
+	}	
+</script>
+</body>
+</html>
